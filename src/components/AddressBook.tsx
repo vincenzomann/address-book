@@ -6,7 +6,7 @@ interface Props extends RouteComponentProps { }
 const AddressBook: React.FC<Props> = () => {
 	return (
 		<div>
-
+			hi
 		</div>
 	);
 };

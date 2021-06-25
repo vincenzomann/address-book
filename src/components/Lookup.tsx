@@ -6,7 +6,7 @@ interface Props extends RouteComponentProps { }
 const Lookup: React.FC<Props> = () => {
 	return (
 		<div>
-
+			bye
 		</div>
 	);
 };

@@ -1,13 +1,87 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
 	height: 100%;
 	width: 100%;
 }
 
-#id, #app {
-	
+#root,
+#app {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	font-family: DM Sans, sans-serif;
+
+	#sideNav {
+		height: 100%;
+		min-width: 72px;
+		border-right: 1px solid lightGrey;
+		text-align: center;
+		@media only screen and (min-width: 700px) {
+			min-width: 240px;
+			text-align: left;
+		}
+
+		#logoItem {
+			padding: 1.5rem 1rem;
+
+			.logo {
+				height: 2.25rem;
+			}
+			#logo-full {
+				display: none;
+				@media only screen and (min-width: 700px) {
+					display: inline;
+				}
+			}
+			#logo-mob {
+				display: inline;
+				@media only screen and (min-width: 700px) {
+					display: none;
+				}
+			}
+		}
+
+		#navItems {
+			:hover {
+				background-color: #f5f5f5;
+				cursor: pointer;
+				* {
+					color: #009bc1;
+				}
+			}
+
+			.navItem {
+				padding: 1rem 1rem;
+				vertical-align: middle;
+				.icon {
+					color: grey;
+					@media only screen and (min-width: 700px) {
+						padding: 0 0.25rem;
+					}
+				}
+				.linkText {
+					text-decoration: none;
+					display: none;
+					padding: 1rem;
+					@media only screen and (min-width: 700px) {
+						display: inline;
+					}
+				}
+			}
+		}
+	}
+
+	#content {
+		height: 100%;
+		width: 100%;
+		background-color: #f5f5f5;
+		padding: 1rem;
+	}
 }
