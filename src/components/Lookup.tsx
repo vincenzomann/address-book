@@ -1,5 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
+import Select from 'react-select';
+import { countries } from '../helpers/countries';
 
 const formReducer = (state: any, event: any) => {
 	return {
@@ -37,17 +39,32 @@ const Lookup: React.FC<Props> = () => {
 		e.preventDefault();
 		console.log(formData);
 
+		let postCodeRegex = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
+
+		if (!formData.postcode) {
+			// Return if no postcode set
+			return setError('Input required');
+		} else {
+			// If postcode doesn't match the regex format, search() returns -1
+			if (formData.postcode.search(postCodeRegex) === -1) return;
+		}
+
 		if (mode === 'postcode') {
-			// Check required inputs
-			if (!formData.postcode) {
-				return setError('Input required');
-			}
+
 		} else {
 			// Check required inputs
 			if (!formData.postcode || !formData.address1 || !formData.town || !formData.country) {
 				return setError('Input required');
 			}
 		}
+	};
+
+	const customStyles = {
+		control: (styles: any) => ({
+			...styles, borderRadius: '10px', height: '2.5rem', padding: '0 0.5rem',
+			border: (error && !formData.country) && '1px solid #f36f5e'
+		}),
+		valueContainer: (styles: any) => ({ ...styles, height: '100%', padding: '0 0.5rem' }),
 	};
 
 	const setErrorBorder = (formProperty: string) => {
@@ -118,10 +135,17 @@ const Lookup: React.FC<Props> = () => {
 										style={setErrorBorder(formData.town)} />
 								</div>
 								<div>
-									<input type="text" placeholder='*country'
-										name='country' value={formData.country}
-										onChange={(e) => handleChange(e)}
-										style={setErrorBorder(formData.country)} />
+									<Select id='select' placeholder='*country'
+										styles={customStyles} isClearable
+										options={countries.map((country) => {
+											return { value: country, label: country };
+										})} onChange={(e) => {
+											setError('');
+											setFormData({
+												name: 'country',
+												value: e?.value,
+											});
+										}} />
 								</div>
 							</div>
 						)}
