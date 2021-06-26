@@ -1,4 +1,4 @@
-import { Link, navigate } from '@reach/router';
+import { navigate } from '@reach/router';
 import React from 'react';
 import { FaAddressBook, FaMapMarkedAlt } from 'react-icons/fa';
 
