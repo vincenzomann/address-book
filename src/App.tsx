@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.scss';
 import { navigate, Router } from '@reach/router';
 import AddressBook from './components/AddressBook';
-import Lookup from './components/Lookup';
+import AddAddress from './components/AddAddress';
 import ContextProvider from './context/Context';
 import SideNav from './components/SideNav';
 
@@ -21,7 +21,7 @@ function App() {
 				<div id="content">
 					<Router>
 						<AddressBook path='/address-book' default />
-						<Lookup path='/lookup' />
+						<AddAddress path='/add-address' />
 					</Router>
 				</div>
 			</ContextProvider>
