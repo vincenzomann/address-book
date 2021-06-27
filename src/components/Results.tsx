@@ -5,16 +5,31 @@ import AddressInfo from './AddressInfo';
 
 interface Props {
 	results: Response;
-	handleAdd: (address: Address) => void;
+	setError: React.Dispatch<React.SetStateAction<string>>;
+	setMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Results: React.FC<Props> = ({ results, handleAdd }) => {
+const Results: React.FC<Props> = ({ setError, setMessage }) => {
 
-	const { addresses } = useContextProvider();
+	const { addresses, setAddresses, results } = useContextProvider();
+
+	const handleAdd = (address: Address) => {
+		setError('');
+		setMessage('');
+		// Check if the address is already in the address book
+		if (addresses.findIndex((stateAddress) => {
+			return stateAddress.id === address.id;
+		}) !== -1) {
+			return setError('Address already added');
+		}
+		setAddresses((prevState) => {
+			return [...prevState, address];
+		});
+	};
 
 	return (
 		<div>
-			<h2>Results</h2>
+			{results.postcode && <h2>Results</h2>}
 			{results.addresses.map((data) => {
 				const address: Address = {
 					id: data.line_1 + results.postcode,

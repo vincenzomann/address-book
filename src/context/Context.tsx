@@ -1,14 +1,24 @@
 import React, { createContext, Dispatch, SetStateAction, useContext, useState } from 'react';
 import { Address } from '../types';
+import { Response } from './../types';
 
 interface ContextType {
 	addresses: Address[],
 	setAddresses: Dispatch<SetStateAction<Address[]>>;
+	results: Response,
+	setResults: React.Dispatch<React.SetStateAction<Response>>;
 }
 
 const initialState = {
 	addresses: [],
-	setAddresses: () => []
+	setAddresses: () => [],
+	results: {
+		postcode: '',
+		latitude: 0,
+		longitude: 0,
+		addresses: []
+	},
+	setResults: () => { }
 };
 
 const Context = createContext<ContextType>(initialState);
@@ -20,10 +30,18 @@ export function useContextProvider() {
 const ContextProvider: React.FC = ({ children }) => {
 
 	const [addresses, setAddresses] = useState<Address[]>([]);
+	const [results, setResults] = useState<Response>({
+		postcode: '',
+		latitude: 0,
+		longitude: 0,
+		addresses: []
+	});
 
 	const values = {
 		addresses,
-		setAddresses
+		setAddresses,
+		results,
+		setResults
 	};
 
 	return (

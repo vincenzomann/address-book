@@ -84,12 +84,12 @@
 
 	#results {
 		margin: 1rem;
-		:hover {
-			color: #009bc1;
-		}
 		.result {
 			margin: 1rem 0;
 			cursor: pointer;
+			:hover {
+				color: #009bc1;
+			}
 		}
 		.card {
 			padding: 1rem;
