@@ -218,6 +218,9 @@ body {
 				.added {
 					border-color: lightgreen;
 					color: lightgreen;
+					:hover {
+						color: lightgreen;
+					}
 				}
 			}
 		}

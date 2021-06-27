@@ -30,7 +30,7 @@ const AddressBook: React.FC<Props> = () => {
 				</p>
 			}
 			<div id='addresses'>
-				{addresses.map((address) => (
+				{addresses.length ? addresses.map((address) => (
 					// If the card id matches the selected id, add styling to the card border
 					<div className={`card address ${(address.id === selected?.id) && 'selected'} `} key={address.id}
 						onClick={() => setSelected(address)}
@@ -42,7 +42,7 @@ const AddressBook: React.FC<Props> = () => {
 						{address.town && <p>{address.town}</p>}
 						{address.country && <p>{address.country}</p>}
 					</div>
-				))}
+				)) : <div>Go to the "Add Address" page to fill your address book</div>}
 			</div>
 		</div>
 	);

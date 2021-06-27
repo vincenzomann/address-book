@@ -58,7 +58,7 @@ const Lookup: React.FC<Props> = () => {
 		}
 
 		if (mode === 'search') {
-			fetch(`https://api.getAddress.io/find/${formData.postcode}${formData.houseNumber && `/${formData.houseNumber}`}?api-key=${process.env.REACT_APP_API_KE}&expand=true`, {
+			fetch(`https://api.getAddress.io/find/${formData.postcode}${formData.houseNumber && `/${formData.houseNumber}`}?api-key=${process.env.REACT_APP_API_KEY}&expand=true`, {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Content-Type': 'application/json'
@@ -67,8 +67,11 @@ const Lookup: React.FC<Props> = () => {
 				return res.json();
 			}).then((data: Response) => {
 				setResults(data);
+				setError('');
+				setMessage('');
 			}).catch((error) => {
-				setError('Invalid call, please insert your getAddress() API key in the .env file. Eg. REACT_APP_API_KEY=your-api-key');
+				console.log(error);
+				setError('Invalid call, please insert your getAddress() API key in the .env file and restart the server. Eg. REACT_APP_API_KEY=your-api-key');
 			});
 		} else {
 			// Check required inputs
@@ -114,6 +117,8 @@ const Lookup: React.FC<Props> = () => {
 	};
 
 	const handleAdd = (address: Address) => {
+		setError('');
+		setMessage('');
 		// Check if the address is already in the address book
 		if (addresses.findIndex((stateAddress) => {
 			return stateAddress.id === address.id;

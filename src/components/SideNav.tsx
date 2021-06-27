@@ -20,7 +20,7 @@ const SideNav: React.FC<Props> = () => {
 					</div>
 					<div className='navItem' onClick={() => navigate('/add-address')}>
 						<span className='icon'><HiUserAdd size='25' /></span>
-						<span className='linkText'>Lookup Address</span>
+						<span className='linkText'>Add Address</span>
 					</div>
 				</div>
 			</div>
