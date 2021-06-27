@@ -5,7 +5,7 @@ import { countries } from '../helpers/countries';
 import { useContextProvider } from './../context/Context';
 import { Address, Response } from '../types';
 import './sass/AddAddress.scss';
-import AddressInfo from './AddressInfo';
+import Results from './Results';
 
 const formReducer = (state: any, event: any) => {
 	return {
@@ -231,32 +231,7 @@ const Lookup: React.FC<Props> = () => {
 
 			{/* Only display results on search mode */}
 			<div id='results' style={{ display: mode === 'search' ? '' : 'none' }}>
-				{results && <h2>Results</h2>}
-				{results?.addresses.map((data) => {
-					const address: Address = {
-						id: data.line_1 + results.postcode,
-						postcode: results.postcode,
-						line1: data.line_1,
-						line2: data.line_2,
-						line3: data.line_3,
-						town: data.town_or_city,
-						country: data.country,
-					};
-					return (
-						// If the card id exists in the state, show it has been added className style
-						<div
-							className={`card result 
-								${(addresses.findIndex((stateAddress) => {
-								return stateAddress.id === address.id;
-							}) !== -1) && 'added'}
-							`}
-							key={address.id}
-							onClick={() => handleAdd(address)}
-						>
-							<AddressInfo address={address} />
-						</div>
-					);
-				})}
+				{results && <Results results={results} handleAdd={handleAdd} />}
 			</div>
 		</div>
 	);
