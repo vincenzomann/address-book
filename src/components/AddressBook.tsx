@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useContextProvider } from './../context/Context';
 import { Address } from '../types';
+import './sass/AddressBook.scss';
 
 interface Props extends RouteComponentProps { }
 

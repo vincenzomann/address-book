@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { countries } from '../helpers/countries';
 import { useContextProvider } from './../context/Context';
 import { Address, Response } from '../types';
+import './sass/AddAddress.scss';
 
 const formReducer = (state: any, event: any) => {
 	return {

@@ -2,6 +2,7 @@ import { navigate } from '@reach/router';
 import React from 'react';
 import { FaAddressBook } from 'react-icons/fa';
 import { HiUserAdd } from 'react-icons/hi';
+import './sass/SideNav.scss';
 
 interface Props { }
 

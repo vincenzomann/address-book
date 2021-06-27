@@ -1,0 +1,70 @@
+#sideNav {
+	height: 100%;
+	min-width: 72px;
+	border-right: 1px solid lightGrey;
+	text-align: center;
+	@media only screen and (min-width: 700px) {
+		min-width: 240px;
+		text-align: left;
+	}
+
+	#sideContainer {
+		position: sticky;
+		top: 0;
+	}
+
+	#logoItem {
+		padding: 1.5rem 1rem;
+
+		.logo {
+			height: 2.25rem;
+		}
+		#logo-full {
+			display: none;
+			@media only screen and (min-width: 700px) {
+				display: inline;
+			}
+		}
+		#logo-mob {
+			display: inline;
+			@media only screen and (min-width: 700px) {
+				display: none;
+			}
+		}
+	}
+
+	#navItems {
+		:hover {
+			background-color: #f5f5f5;
+			cursor: pointer;
+			* {
+				color: #009bc1;
+			}
+		}
+
+		.navItem {
+			padding: 1rem 1rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			@media only screen and (min-width: 700px) {
+				justify-content: left;
+			}
+			.icon {
+				color: grey;
+				@media only screen and (min-width: 700px) {
+					padding: 0 0.5rem;
+				}
+			}
+			.linkText {
+				text-decoration: none;
+				font-size: small;
+				display: none;
+				padding: 0 1rem;
+				@media only screen and (min-width: 700px) {
+					display: inline;
+				}
+			}
+		}
+	}
+}
