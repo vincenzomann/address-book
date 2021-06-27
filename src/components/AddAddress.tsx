@@ -5,6 +5,7 @@ import { countries } from '../helpers/countries';
 import { useContextProvider } from './../context/Context';
 import { Address, Response } from '../types';
 import './sass/AddAddress.scss';
+import AddressInfo from './AddressInfo';
 
 const formReducer = (state: any, event: any) => {
 	return {
@@ -252,12 +253,7 @@ const Lookup: React.FC<Props> = () => {
 							key={address.id}
 							onClick={() => handleAdd(address)}
 						>
-							{address.line1 && <p>{address.line1}</p>}
-							{address.line2 && <p>{address.line2}</p>}
-							{address.line3 && <p>{address.line3}</p>}
-							{address.postcode && <p>{address.postcode}</p>}
-							{address.town && <p>{address.town}</p>}
-							{address.country && <p>{address.country}</p>}
+							<AddressInfo address={address} />
 						</div>
 					);
 				})}
