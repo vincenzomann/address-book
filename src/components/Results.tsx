@@ -11,7 +11,7 @@ interface Props {
 
 const Results: React.FC<Props> = ({ setError, setMessage }) => {
 
-	const { addresses, setAddresses, results } = useContextProvider();
+	const { addresses, setAddresses, results, selected, setSelected } = useContextProvider();
 
 	const handleAdd = (address: Address) => {
 		setError('');
@@ -25,6 +25,20 @@ const Results: React.FC<Props> = ({ setError, setMessage }) => {
 		setAddresses((prevState) => {
 			return [...prevState, address];
 		});
+	};
+
+	const classNames = (address: Address) => {
+		// If the card id exists in the state, show it has been added className style
+		// If the card id matches the selected id, add styling to the card border
+		let classNames = [];
+		if (addresses.findIndex((stateAddress) => stateAddress.id === address.id) !== -1) {
+			classNames.push('added');
+		}
+		if (address.id === selected.id) {
+			classNames.push('selected');
+		}
+		console.log(classNames);
+		return classNames.join(' ');
 	};
 
 	return (
@@ -41,15 +55,13 @@ const Results: React.FC<Props> = ({ setError, setMessage }) => {
 					country: data.country,
 				};
 				return (
-					// If the card id exists in the state, show it has been added className style
 					<div
-						className={`card result 
-								${(addresses.findIndex((stateAddress) => {
-							return stateAddress.id === address.id;
-						}) !== -1) && 'added'}
-							`}
+						className={`card result ${classNames(address)}`}
 						key={address.id}
-						onClick={() => handleAdd(address)}
+						onClick={() => {
+							handleAdd(address);
+							setSelected(address);
+						}}
 					>
 						<AddressInfo address={address} />
 					</div>

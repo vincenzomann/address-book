@@ -5,6 +5,8 @@ import { Response } from './../types';
 interface ContextType {
 	addresses: Address[],
 	setAddresses: Dispatch<SetStateAction<Address[]>>;
+	selected: Address,
+	setSelected: Dispatch<SetStateAction<Address>>;
 	results: Response,
 	setResults: React.Dispatch<React.SetStateAction<Response>>;
 }
@@ -12,6 +14,16 @@ interface ContextType {
 const initialState = {
 	addresses: [],
 	setAddresses: () => [],
+	selected: {
+		id: '',
+		postcode: '',
+		line1: '',
+		line2: '',
+		line3: '',
+		town: '',
+		country: ''
+	},
+	setSelected: () => { },
 	results: {
 		postcode: '',
 		latitude: 0,
@@ -31,6 +43,15 @@ const ContextProvider: React.FC = ({ children }) => {
 
 	// Central state that can be accessed across components
 	const [addresses, setAddresses] = useState<Address[]>([]);
+	const [selected, setSelected] = useState<Address>({
+		id: '',
+		postcode: '',
+		line1: '',
+		line2: '',
+		line3: '',
+		town: '',
+		country: ''
+	});
 	const [results, setResults] = useState<Response>({
 		postcode: '',
 		latitude: 0,
@@ -41,6 +62,8 @@ const ContextProvider: React.FC = ({ children }) => {
 	const values = {
 		addresses,
 		setAddresses,
+		selected,
+		setSelected,
 		results,
 		setResults
 	};

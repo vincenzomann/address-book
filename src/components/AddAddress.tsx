@@ -4,12 +4,13 @@ import './sass/AddAddress.scss';
 import Results from './Results';
 import AddressForm from './AddressForm';
 import { useContextProvider } from '../context/Context';
+import AddressInfo from './AddressInfo';
 
 interface Props extends RouteComponentProps { }
 
 const Lookup: React.FC<Props> = () => {
 
-	const { results, setResults } = useContextProvider();
+	const { results, setResults, selected } = useContextProvider();
 
 	const [error, setError] = useState('');
 	const [message, setMessage] = useState('');
@@ -30,6 +31,14 @@ const Lookup: React.FC<Props> = () => {
 					mode={mode} setMode={setMode}
 				/>
 			</div>
+
+			{/* When user clicks on an address card it is displayed */}
+			{selected.id &&
+				<div className='selectedAddress'>
+					Selected Address:
+					<AddressInfo address={selected} />
+				</div>
+			}
 
 			{/* Only display results on search mode */}
 			<div id='results' style={{ display: mode === 'search' ? '' : 'none' }}>

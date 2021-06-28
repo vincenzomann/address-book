@@ -136,7 +136,7 @@ const AddressForm: React.FC<Props> = ({
 
 	// When a required field is empty on form submit, change the field border red
 	const setErrorBorder = (formProperty: string) => {
-		if (error && !formProperty) {
+		if (error === 'Field input required' && !formProperty) {
 			return {
 				border: '1px solid #f36f5e'
 			};
