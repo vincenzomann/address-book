@@ -16,7 +16,7 @@ function App() {
 	}, []);
 
 	return (
-		<div id='app'>
+		<div id='app' data-testid='app'>
 			<ContextProvider >
 				<SideNav />
 				<div id='content'>
