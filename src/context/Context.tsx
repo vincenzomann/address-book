@@ -29,6 +29,7 @@ export function useContextProvider() {
 
 const ContextProvider: React.FC = ({ children }) => {
 
+	// Central state that can be accessed across components
 	const [addresses, setAddresses] = useState<Address[]>([]);
 	const [results, setResults] = useState<Response>({
 		postcode: '',

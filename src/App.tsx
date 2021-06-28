@@ -9,16 +9,17 @@ import SideNav from './components/SideNav';
 function App() {
 
 	useEffect(() => {
+		// Redirect user to AddressBook as the root endpoint
 		if (window.location.pathname === '/') {
 			navigate('/address-book');
 		}
 	}, []);
 
 	return (
-		<div id="app">
+		<div id='app'>
 			<ContextProvider >
 				<SideNav />
-				<div id="content">
+				<div id='content'>
 					<Router>
 						<AddressBook path='/address-book' default />
 						<AddAddress path='/add-address' />

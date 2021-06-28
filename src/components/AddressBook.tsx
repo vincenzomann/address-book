@@ -9,6 +9,7 @@ interface Props extends RouteComponentProps { }
 
 const AddressBook: React.FC<Props> = () => {
 
+	// Use state from context
 	const { addresses } = useContextProvider();
 
 	const [selected, setSelected] = useState<Address>();
@@ -18,6 +19,7 @@ const AddressBook: React.FC<Props> = () => {
 			<h1 className='pageTitle'>
 				Address Book
 			</h1>
+			{/* When user clicks on an address card it is displayed */}
 			{selected &&
 				<div id='selectedAddress'>
 					Selected Address:
@@ -25,14 +27,18 @@ const AddressBook: React.FC<Props> = () => {
 				</div>
 			}
 			<div id='addresses'>
-				{addresses.length ? addresses.map((address) => (
-					// If the card id matches the selected id, add styling to the card border
-					<div className={`card address ${(address.id === selected?.id) && 'selected'} `} key={address.id}
-						onClick={() => setSelected(address)}
-					>
-						<AddressInfo address={address} />
-					</div>
-				)) : <div>Go to the "Add Address" page to fill your address book</div>}
+				{/* If there are address in saved they are displayed, else shows message */}
+				{addresses.length ?
+					addresses.map((address) => (
+						// If the card id matches the selected id, add styling to the card border
+						<div className={`card address ${(address.id === selected?.id) && 'selected'} `} key={address.id}
+							onClick={() => setSelected(address)}
+						>
+							<AddressInfo address={address} />
+						</div>
+					)) : (
+						<div>Go to the 'Add Address' page to fill your address book</div>
+					)}
 			</div>
 		</div>
 	);

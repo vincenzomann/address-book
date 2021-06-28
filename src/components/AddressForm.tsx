@@ -17,15 +17,17 @@ interface Props {
 	setError: React.Dispatch<React.SetStateAction<string>>;
 	message: string;
 	setMessage: React.Dispatch<React.SetStateAction<string>>;
-	mode: "search" | "manual";
-	setMode: React.Dispatch<React.SetStateAction<"search" | "manual">>;
+	mode: 'search' | 'manual';
+	setMode: React.Dispatch<React.SetStateAction<'search' | 'manual'>>;
 }
 
 const AddressForm: React.FC<Props> = ({
 	setResults, error, setError, message, setMessage, mode, setMode }) => {
 
+	// Get state from context
 	const { addresses, setAddresses } = useContextProvider();
 
+	// Reducer holds all the values from both forms
 	const [formData, setFormData] = useReducer(formReducer, {
 		postcode: '',
 		houseNumber: '',
@@ -36,6 +38,7 @@ const AddressForm: React.FC<Props> = ({
 		country: '',
 	});
 
+	// When a form input is updated the value is added to the form by its name
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setError('');
 		setMessage('');
@@ -48,18 +51,20 @@ const AddressForm: React.FC<Props> = ({
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		let postCodeRegex = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
+		// Regex to check the postcode has correct format
+		let postcodeRegex = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
 
 		if (!formData.postcode) {
 			// Return if no postcode set
 			return setError('Field input required');
 		} else {
 			// If postcode doesn't match the regex format, search() returns -1
-			if (formData.postcode.search(postCodeRegex) === -1) {
+			if (formData.postcode.search(postcodeRegex) === -1) {
 				return setError('Invalid Postcode');
 			};
 		}
 
+		// Perform logic for 'search' form, else 'manual' form
 		if (mode === 'search') {
 			fetch(`https://api.getAddress.io/find/${formData.postcode}${formData.houseNumber && `/${formData.houseNumber}`}?api-key=${process.env.REACT_APP_API_KEY}&expand=true`, {
 				headers: {
@@ -69,6 +74,7 @@ const AddressForm: React.FC<Props> = ({
 			}).then((res) => {
 				return res.json();
 			}).then((data: Response) => {
+				// Set the response data in the context state
 				setResults(data);
 				setError('');
 				setMessage('');
@@ -77,6 +83,8 @@ const AddressForm: React.FC<Props> = ({
 				setError('Invalid call, please insert your getAddress() API key in the .env file and restart the server. Eg. REACT_APP_API_KEY=your-api-key');
 			});
 		} else {
+			// Logic for 'manual' form
+
 			// Check required inputs
 			if (!formData.postcode || !formData.address1 || !formData.town || !formData.country) {
 				return setError('Field input required');
@@ -93,14 +101,12 @@ const AddressForm: React.FC<Props> = ({
 				country: formData.country,
 			};
 			// Check if address already exists
-			console.log(addresses.findIndex((stateAddress) => {
-				return stateAddress.id === address.id;
-			}));
 			if (addresses.findIndex((stateAddress) => {
 				return stateAddress.id === address.id;
 			}) !== -1) {
 				return setError('Address already added');
 			} else {
+				// Append the address to the context state of addresses
 				setAddresses((prevState) => {
 					return [...prevState, address];
 				});
@@ -119,6 +125,7 @@ const AddressForm: React.FC<Props> = ({
 		}
 	};
 
+	// Customise react-select dropdown form
 	const customStyles = {
 		control: (styles: any) => ({
 			...styles, borderRadius: '10px', height: '2.5rem', padding: '0 0.5rem',
@@ -127,6 +134,7 @@ const AddressForm: React.FC<Props> = ({
 		valueContainer: (styles: any) => ({ ...styles, height: '100%', padding: '0 0.5rem' }),
 	};
 
+	// When a required field is empty on form submit, change the field border red
 	const setErrorBorder = (formProperty: string) => {
 		if (error && !formProperty) {
 			return {
@@ -138,12 +146,14 @@ const AddressForm: React.FC<Props> = ({
 	return (
 		<div className='card'>
 			<div id='switch'>
+				{/* Switch between 'search' and 'manual' forms */}
 				<span className={`option ${mode === 'search' && 'selected'}`}
 					onClick={() => setMode('search')}>SEARCH</span>
 				<span className={`option ${mode === 'manual' && 'selected'}`}
 					onClick={() => setMode('manual')}>MANUAL</span>
 			</div>
 			<form id='form' onSubmit={(e) => handleSubmit(e)}>
+				{/* Show different fields depending on the form mode */}
 				{mode === 'search' ? (
 					<div id='postcode' className='inputs'>
 						<div>
@@ -189,6 +199,7 @@ const AddressForm: React.FC<Props> = ({
 								style={setErrorBorder(formData.town)} />
 						</div>
 						<div>
+							{/* Module that provides dropdown select, options are from countries.tsx */}
 							<Select id='select' placeholder='*country'
 								styles={customStyles} isClearable
 								options={countries.map((country) => {

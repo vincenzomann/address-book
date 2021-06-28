@@ -11,9 +11,10 @@ const Lookup: React.FC<Props> = () => {
 
 	const { results, setResults } = useContextProvider();
 
-	const [mode, setMode] = useState<'search' | 'manual'>('search');
 	const [error, setError] = useState('');
 	const [message, setMessage] = useState('');
+	// Determines which form to display
+	const [mode, setMode] = useState<'search' | 'manual'>('search');
 
 	return (
 		<div id='addAddress'>
