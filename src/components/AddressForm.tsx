@@ -3,6 +3,7 @@ import { useContextProvider } from '../context/Context';
 import { countries } from '../helpers/countries';
 import { Address } from '../types';
 import Select from 'react-select';
+import fetchAddress from '../helpers/fetchAddress';
 
 const formReducer = (state: any, event: any) => {
 	return {
@@ -66,14 +67,7 @@ const AddressForm: React.FC<Props> = ({
 
 		// Perform logic for 'search' form, else 'manual' form
 		if (mode === 'search') {
-			fetch(`https://api.getAddress.io/find/${formData.postcode}${formData.houseNumber && `/${formData.houseNumber}`}?api-key=${process.env.REACT_APP_API_KEY}&expand=true`, {
-				headers: {
-					'Access-Control-Allow-Origin': '*',
-					'Content-Type': 'application/json'
-				},
-			}).then((res) => {
-				return res.json();
-			}).then((data: Response) => {
+			fetchAddress(formData).then((data: Response) => {
 				// Set the response data in the context state
 				setResults(data);
 				setError('');
@@ -92,7 +86,7 @@ const AddressForm: React.FC<Props> = ({
 
 			// Add address to context state
 			const address: Address = {
-				id: formData.address1 + formData.postcode,
+				id: formData.postcode + formData.address1 + formData.address2 + formData.address3,
 				postcode: formData.postcode,
 				line1: formData.address1,
 				line2: formData.address2,

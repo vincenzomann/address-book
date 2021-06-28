@@ -46,7 +46,7 @@ const Results: React.FC<Props> = ({ setError, setMessage }) => {
 			{results.postcode && <h2>Results</h2>}
 			{results.addresses.map((data) => {
 				const address: Address = {
-					id: data.line_1 + results.postcode,
+					id: results.postcode + data.line_1 + data.line_2 + data.line_3,
 					postcode: results.postcode,
 					line1: data.line_1,
 					line2: data.line_2,
