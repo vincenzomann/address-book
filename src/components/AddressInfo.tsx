@@ -7,7 +7,7 @@ interface Props {
 
 const AddressInfo: React.FC<Props> = ({ address }) => {
 	return (
-		<div>
+		<div data-testid='addressInfo'>
 			{address.line1 && <p>{address.line1}</p>}
 			{address.line2 && <p>{address.line2}</p>}
 			{address.line3 && <p>{address.line3}</p>}

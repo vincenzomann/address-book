@@ -1,9 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import toJSON from 'enzyme-to-json';
 import App from './App';
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import '@testing-library/jest-dom';
 
-test('matches snapshot', () => {
-	const wrapper = shallow(<App />);
-	expect(toJSON(wrapper)).toMatchSnapshot();
+it('renders correctly', () => {
+	render(<App />);
+	const component = screen.queryByTestId('app');
+	expect(component).toBeInTheDocument();
 });

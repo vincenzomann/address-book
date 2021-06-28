@@ -1,9 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import toJSON from 'enzyme-to-json';
 import AddressBook from '../AddressBook';
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import '@testing-library/jest-dom';
 
-test('matches snapshot', () => {
-	const wrapper = shallow(<AddressBook />);
-	expect(toJSON(wrapper)).toMatchSnapshot();
+it('renders correctly', () => {
+	render(<AddressBook />);
+	const component = screen.queryByTestId('addressBook');
+	expect(component).toBeInTheDocument();
 });

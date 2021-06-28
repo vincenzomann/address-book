@@ -1,10 +1,9 @@
 import React from 'react';
 import { useContextProvider } from '../context/Context';
-import { Address, Response } from './../types';
+import { Address } from './../types';
 import AddressInfo from './AddressInfo';
 
-interface Props {
-	results: Response;
+export interface Props {
 	setError: React.Dispatch<React.SetStateAction<string>>;
 	setMessage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -42,7 +41,7 @@ const Results: React.FC<Props> = ({ setError, setMessage }) => {
 	};
 
 	return (
-		<div>
+		<div data-testid='results'>
 			{results.postcode && <h2>Results</h2>}
 			{results.addresses.map((data) => {
 				const address: Address = {

@@ -18,7 +18,7 @@ const Lookup: React.FC<Props> = () => {
 	const [mode, setMode] = useState<'search' | 'manual'>('search');
 
 	return (
-		<div id='addAddress'>
+		<div id='addAddress' data-testid='addAddress'>
 			<h1 className='pageTitle'>
 				Add Address
 			</h1>
@@ -42,7 +42,7 @@ const Lookup: React.FC<Props> = () => {
 
 			{/* Only display results on search mode */}
 			<div id='results' style={{ display: mode === 'search' ? '' : 'none' }}>
-				{results && <Results results={results} setError={setError} setMessage={setMessage} />}
+				{results && <Results setError={setError} setMessage={setMessage} />}
 			</div>
 		</div>
 	);

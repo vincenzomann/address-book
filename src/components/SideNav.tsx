@@ -8,7 +8,7 @@ interface Props { }
 
 const SideNav: React.FC<Props> = () => {
 	return (
-		<div id='sideNav'>
+		<div id='sideNav' data-testid='sideNav'>
 			<div id='sideContainer'>
 				<div id='logoItem'>
 					{/* Responsive media queries determine which elements are displayed */}

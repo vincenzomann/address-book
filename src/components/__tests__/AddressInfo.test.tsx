@@ -1,7 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import toJSON from 'enzyme-to-json';
 import AddressInfo from '../AddressInfo';
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import '@testing-library/jest-dom';
+
+it('renders correctly', () => {
+	render(<AddressInfo address={mockAddress} />);
+	const component = screen.queryByTestId('addressInfo');
+	expect(component).toBeInTheDocument();
+});
 
 const mockAddress = {
 	id: 'ss12tw24',
@@ -12,8 +18,3 @@ const mockAddress = {
 	town: 'Southend',
 	country: 'England'
 };
-
-test('matches snapshot', () => {
-	const wrapper = shallow(<AddressInfo address={mockAddress} />);
-	expect(toJSON(wrapper)).toMatchSnapshot();
-});

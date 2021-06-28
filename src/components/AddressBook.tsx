@@ -12,7 +12,7 @@ const AddressBook: React.FC<Props> = () => {
 	const { addresses, selected, setSelected } = useContextProvider();
 
 	return (
-		<div id='addressBook'>
+		<div id='addressBook' data-testid='addressBook'>
 			<h1 className='pageTitle'>
 				Address Book
 			</h1>

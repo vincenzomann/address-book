@@ -12,7 +12,7 @@ const formReducer = (state: any, event: any) => {
 	};
 };
 
-interface Props {
+export interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Response | any>>;
 	error: string;
 	setError: React.Dispatch<React.SetStateAction<string>>;
@@ -138,7 +138,7 @@ const AddressForm: React.FC<Props> = ({
 	};
 
 	return (
-		<div className='card'>
+		<div className='card' data-testid='addressForm'>
 			<div id='switch'>
 				{/* Switch between 'search' and 'manual' forms */}
 				<span className={`option ${mode === 'search' && 'selected'}`}
