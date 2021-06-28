@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  id="sideNav"
+>
+  <div
+    id="sideContainer"
+  >
+    <div
+      id="logoItem"
+    >
+      <img
+        alt="Bequest"
+        className="logo"
+        id="logo-mob"
+        src="https://bequest.app/static/media/icon.3ab9eb70.png"
+      />
+      <img
+        alt="Bequest"
+        className="logo"
+        id="logo-full"
+        src="https://bequest.app/static/media/logo.e211df9f.png"
+      />
+    </div>
+    <div
+      id="navItems"
+    >
+      <div
+        className="navItem"
+        onClick={[Function]}
+      >
+        <span
+          className="icon"
+        >
+          <FaAddressBook
+            size="25"
+          />
+        </span>
+        <span
+          className="linkText"
+        >
+          Address Book
+        </span>
+      </div>
+      <div
+        className="navItem"
+        onClick={[Function]}
+      >
+        <span
+          className="icon"
+        >
+          <HiUserAdd
+            size="25"
+          />
+        </span>
+        <span
+          className="linkText"
+        >
+          Add Address
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

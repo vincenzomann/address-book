@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
-import AddressBook from '../AddressBook';
+import SideNav from '../SideNav';
 
 test('matches snapshot', () => {
-	const wrapper = shallow(<AddressBook />);
+	const wrapper = shallow(<SideNav />);
 	expect(toJSON(wrapper)).toMatchSnapshot();
 });
