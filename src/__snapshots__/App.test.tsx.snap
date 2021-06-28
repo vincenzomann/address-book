@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the component 1`] = `
+<div
+  data-testid="app"
+  id="app"
+>
+  <ContextProvider>
+    <SideNav />
+    <div
+      id="content"
+    >
+      <Router>
+        <AddressBook
+          default={true}
+          path="/address-book"
+        />
+        <Lookup
+          path="/add-address"
+        />
+      </Router>
+    </div>
+  </ContextProvider>
+</div>
+`;
