@@ -146,12 +146,12 @@ const AddressForm: React.FC<Props> = ({
 				<span className={`option ${mode === 'manual' && 'selected'}`}
 					onClick={() => setMode('manual')}>MANUAL</span>
 			</div>
-			<form id='form' onSubmit={(e) => handleSubmit(e)}>
+			<form id='form' onSubmit={(e) => handleSubmit(e)} data-testid='form'>
 				{/* Show different fields depending on the form mode */}
 				{mode === 'search' ? (
 					<div id='postcode' className='inputs'>
 						<div>
-							<input type='text' placeholder='*postcode'
+							<input type='text' placeholder='*postcode' data-testid='postcode'
 								name='postcode' value={formData.postcode}
 								onChange={(e) => handleChange(e)}
 								style={setErrorBorder(formData.postcode)} />
@@ -194,7 +194,7 @@ const AddressForm: React.FC<Props> = ({
 						</div>
 						<div>
 							{/* Module that provides dropdown select, options are from countries.tsx */}
-							<Select id='select' placeholder='*country'
+							<Select id='select' placeholder='*country' name='country'
 								styles={customStyles} isClearable
 								options={countries.map((country) => {
 									return { value: country, label: country };
